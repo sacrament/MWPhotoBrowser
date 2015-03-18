@@ -29,6 +29,7 @@
 - (id)initWithDelegate:(id <MWPhotoBrowserDelegate>)delegate {
     if ((self = [self init])) {
         _delegate = delegate;
+        [self setCurrentPhotoIndex:0];
 	}
 	return self;
 }
@@ -643,7 +644,7 @@
 }
 
 - (NSUInteger)numberOfPhotos {
-    if (_photoCount == NSNotFound) {
+    if (_photoCount == NSNotFound || _photoCount == 0) {
         if ([_delegate respondsToSelector:@selector(numberOfPhotosInPhotoBrowser:)]) {
             _photoCount = [_delegate numberOfPhotosInPhotoBrowser:self];
         } else if (_depreciatedPhotoData) {
